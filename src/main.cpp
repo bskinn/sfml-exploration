@@ -11,6 +11,7 @@
 sf::Vector2f centroid(sf::ConvexShape shp);
 sf::Vector2f circleCenter(sf::CircleShape circ);
 float effectiveSize(sf::ConvexShape shp);
+std::vector<std::uint8_t> unpackPixels(std::vector<std::vector<std::uint32_t>> pxArr);
 
 int main()
 {
@@ -20,7 +21,7 @@ int main()
     sf::CircleShape circle(CIRCLE_RADIUS);
     circle.setFillColor(sf::Color::Cyan);
     circle.setPosition(sf::Vector2f(160., 200.));
-    // circle.setOrigin(circleCenter(circle));   // This doesn't work like you expect
+    // circle.setOrigin(circleCenter(circle));   // This doesn't work like you'd expect
 
     sf::ConvexShape triangle;
     triangle.setPointCount(3);
@@ -29,6 +30,9 @@ int main()
     triangle.setPoint(2, {10.f, 50.f});
     triangle.setFillColor(sf::Color::Red);
     triangle.setOrigin(centroid(triangle));
+
+    sf::Texture texture(sf::Vector2u(100, 50));
+    // std::vector<>
 
     sf::Font font("fonts/Carlito-Regular.ttf");
 
@@ -205,4 +209,28 @@ float effectiveSize(sf::ConvexShape shp)
     sf::Vector2f boundRectSize = shp.getLocalBounds().size;
 
     return std::max(boundRectSize.x, boundRectSize.y);
+}
+
+std::vector<std::uint8_t> unpackPixels(std::vector<std::vector<std::uint32_t>> pxArr)
+{
+    std::vector<std::uint8_t> outVec = {};
+    outVec.reserve(4 * pxArr.size() * pxArr[0].size()); // Assume rectangular
+
+    std::vector<std::uint32_t> row;
+
+    uint32_t val;
+
+    for (int rowIdx = 0; rowIdx < pxArr.size(); rowIdx++)
+    {
+        row = pxArr[rowIdx];
+        for (int colIdx = 0; colIdx < row.size(); colIdx++)
+        {
+            val = row[colIdx];
+
+            outVec.push_back(uint8_t(val / (256 * 256 * 256)));   // Red
+            outVec.push_back(uint8_t((val / (256 * 256)) % 256)); // Green
+            outVec.push_back(uint8_t((val / 256) % 256));         // Blue
+            outVec.push_back(uint8_t(val % 256));                 // Alpha
+        }
+    }
 }
