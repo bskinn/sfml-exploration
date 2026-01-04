@@ -29,8 +29,8 @@ SOFTWARE.
 ## Repository Template
 
 This repository created from the template at
-https://github.com/SFML/cmake-sfml-project, under the MIT License option offered
-there:
+https://github.com/SFML/cmake-sfml-project, under the MIT License option [offered
+there]:
 
 ### MIT License
 
@@ -53,3 +53,5 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+[offered there]: https://github.com/SFML/cmake-sfml-project/blob/98e2d5c3d5f0906a89606044b42f1b756fd7fd4b/LICENSE.md
