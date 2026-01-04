@@ -9,6 +9,7 @@
 #define BOUNCE_BUFFER 50.f
 
 sf::Vector2f centroid(sf::ConvexShape shp);
+sf::Vector2f circleCenter(sf::CircleShape circ);
 float effectiveSize(sf::ConvexShape shp);
 
 int main()
@@ -16,28 +17,46 @@ int main()
     auto window = sf::RenderWindow(sf::VideoMode({WINDOW_WIDTH, WINDOW_HEIGHT}), "Testing SFML");
     window.setFramerateLimit(30);
 
-    sf::ConvexShape shape;
-    shape.setPointCount(3);
-    shape.setPoint(0, {0.f, 0.f});
-    shape.setPoint(1, {40.f, 5.f});
-    shape.setPoint(2, {10.f, 50.f});
-    shape.setFillColor(sf::Color::Red);
+    sf::CircleShape circle(CIRCLE_RADIUS);
+    circle.setFillColor(sf::Color::Cyan);
+    circle.setPosition(sf::Vector2f(160., 200.));
+    // circle.setOrigin(circleCenter(circle));   // This doesn't work like you expect
+
+    sf::ConvexShape triangle;
+    triangle.setPointCount(3);
+    triangle.setPoint(0, {0.f, 0.f});
+    triangle.setPoint(1, {40.f, 5.f});
+    triangle.setPoint(2, {10.f, 50.f});
+    triangle.setFillColor(sf::Color::Red);
+    triangle.setOrigin(centroid(triangle));
 
     sf::Font font("fonts/Carlito-Regular.ttf");
-    sf::Text text(font);
-    text.setCharacterSize(40);
-    text.setFillColor(sf::Color::White);
 
-    // std::string textStr = "";
-    char textStr[100] = "";
+    sf::Text triangleText(font);
+    triangleText.setCharacterSize(40);
+    triangleText.setFillColor(sf::Color::White);
 
-    bool xPosVel = true;
-    bool yPosVel = true;
+    sf::Text circleText(font);
+    circleText.setCharacterSize(40);
+    circleText.setFillColor(sf::Color::Yellow);
+    circleText.setPosition(sf::Vector2f(0., 50.));
 
-    float vel = 5.;
+    char triangleTextStr[100] = "";
+    char circleTextStr[100] = "";
+
+    bool triangleXPosVel = true;
+    bool triangleYPosVel = true;
+
+    bool circleXPosVel = true;
+    bool circleYPosVel = false;
+
+    float triangleVel = 5.;
+    float circleVel = 7.5;
 
     while (window.isOpen())
     {
+        // HALT IF WINDOW CLOSE EVENT RECEIVED
+
         while (const std::optional event = window.pollEvent())
         {
             if (event->is<sf::Event::Closed>())
@@ -46,61 +65,120 @@ int main()
             }
         }
 
-        shape.rotate(sf::degrees(5));
+        // TRIANGLE MOVEMENT
 
-        if (xPosVel)
+        triangle.rotate(sf::degrees(5));
+
+        if (triangleXPosVel)
         {
-            if (yPosVel)
+            if (triangleYPosVel)
             {
-                shape.move(sf::Vector2f(vel, vel));
+                triangle.move(sf::Vector2f(triangleVel, triangleVel));
             }
             else
             {
-                shape.move(sf::Vector2f(vel, -1 * vel));
+                triangle.move(sf::Vector2f(triangleVel, -1 * triangleVel));
             }
         }
         else
         {
-            if (yPosVel)
+            if (triangleYPosVel)
             {
-                shape.move(sf::Vector2f(-1 * vel, vel));
+                triangle.move(sf::Vector2f(-1 * triangleVel, triangleVel));
             }
             else
             {
-                shape.move(sf::Vector2f(-1 * vel, -1 * vel));
+                triangle.move(sf::Vector2f(-1 * triangleVel, -1 * triangleVel));
             }
         }
 
-        if (centroid(shape).x > (WINDOW_WIDTH - 2 * effectiveSize(shape) - BOUNCE_BUFFER))
+        if (centroid(triangle).x > (WINDOW_WIDTH - (effectiveSize(triangle) / 2) - BOUNCE_BUFFER))
         {
-            xPosVel = false;
+            triangleXPosVel = false;
         }
 
-        if (centroid(shape).x < BOUNCE_BUFFER)
+        if (centroid(triangle).x < BOUNCE_BUFFER + (effectiveSize(triangle) / 2))
         {
-            xPosVel = true;
+            triangleXPosVel = true;
         }
 
-        if (centroid(shape).y > (WINDOW_HEIGHT - 2 * effectiveSize(shape) - BOUNCE_BUFFER))
+        if (centroid(triangle).y > (WINDOW_HEIGHT - (effectiveSize(triangle) / 2) - BOUNCE_BUFFER))
         {
-            yPosVel = false;
+            triangleYPosVel = false;
         }
 
-        if (centroid(shape).y < BOUNCE_BUFFER)
+        if (centroid(triangle).y < BOUNCE_BUFFER + (effectiveSize(triangle) / 2))
         {
-            yPosVel = true;
+            triangleYPosVel = true;
         }
 
-        // textStr = std::format(textStr, "(%f, %f)", centroid(shape).x, centroid(shape).y);
-        sprintf(textStr, "(%.0f, %.0f)", centroid(shape).x, centroid(shape).y);
+        // CIRCLE MOVEMENT
 
-        text.setString(textStr);
+        if (circleXPosVel)
+        {
+            if (circleYPosVel)
+            {
+                circle.move(sf::Vector2f(circleVel, circleVel));
+            }
+            else
+            {
+                circle.move(sf::Vector2f(circleVel, -1 * circleVel));
+            }
+        }
+        else
+        {
+            if (circleYPosVel)
+            {
+                circle.move(sf::Vector2f(-1 * circleVel, circleVel));
+            }
+            else
+            {
+                circle.move(sf::Vector2f(-1 * circleVel, -1 * circleVel));
+            }
+        }
+
+        if (circle.getPosition().x > (WINDOW_WIDTH - 2 * CIRCLE_RADIUS - BOUNCE_BUFFER))
+        {
+            circleXPosVel = false;
+        }
+
+        if (circle.getPosition().x < BOUNCE_BUFFER)
+        {
+            circleXPosVel = true;
+        }
+
+        if (circle.getPosition().y > (WINDOW_HEIGHT - 2 * CIRCLE_RADIUS - BOUNCE_BUFFER))
+        {
+            circleYPosVel = false;
+        }
+
+        if (circle.getPosition().y < BOUNCE_BUFFER)
+        {
+            circleYPosVel = true;
+        }
+
+        // TEXT UPDATES
+
+        sprintf(circleTextStr, "Circle: (%.0f, %.0f)", circleCenter(circle).x, circleCenter(circle).y);
+        sprintf(triangleTextStr, "Triangle: (%.0f, %.0f)", centroid(triangle).x, centroid(triangle).y);
+
+        triangleText.setString(triangleTextStr);
+        circleText.setString(circleTextStr);
+
+        // WINDOW UPDATES
 
         window.clear();
-        window.draw(shape);
-        window.draw(text);
+        window.draw(triangle);
+        window.draw(circle);
+        window.draw(triangleText);
+        window.draw(circleText);
         window.display();
     }
+}
+
+sf::Vector2f circleCenter(sf::CircleShape circ)
+{
+    return circ.getPosition() + sf::Vector2f(circ.getRadius(), circ.getRadius());
 }
 
 sf::Vector2f centroid(sf::ConvexShape shp)
