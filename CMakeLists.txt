@@ -13,6 +13,10 @@ FetchContent_Declare(SFML
     SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
-add_executable(demo src/demo/demo.cpp)
+add_executable(demo
+    src/demo/demo.cpp
+    src/demo/helper/demo_helper.cpp
+)
+
 target_compile_features(demo PRIVATE cxx_std_17)
 target_link_libraries(demo PRIVATE SFML::Graphics)
