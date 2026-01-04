@@ -1,4 +1,3 @@
-#include <algorithm>
 #include <string>
 #include <SFML/Graphics.hpp>
 
