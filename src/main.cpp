@@ -3,6 +3,7 @@
 
 #define WINDOW_WIDTH 640u
 #define WINDOW_HEIGHT 480u
+#define MAX_FRAME_RATE 30.
 
 #define CIRCLE_RADIUS 25.f
 #define BOUNCE_BUFFER 50.f
@@ -14,7 +15,7 @@ float effectiveSize(sf::ConvexShape shp);
 int main()
 {
     auto window = sf::RenderWindow(sf::VideoMode({WINDOW_WIDTH, WINDOW_HEIGHT}), "Testing SFML");
-    window.setFramerateLimit(30);
+    window.setFramerateLimit(MAX_FRAME_RATE);
 
     sf::CircleShape circle(CIRCLE_RADIUS);
     circle.setFillColor(sf::Color::Cyan);
