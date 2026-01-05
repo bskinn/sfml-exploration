@@ -1,6 +1,17 @@
 name: CI
 
-on: [workflow_dispatch]
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: 'Git ref to build and deploy to staging'
+        required: true
+        type: string
+      depth:
+        description: 'Checkout depth into the repo history'
+        required: false
+        type: number
+        default: 300
 
 defaults:
   run:
@@ -30,6 +41,10 @@ jobs:
 
     - name: Checkout
       uses: actions/checkout@v6
+      with:
+        ref: ${{ inputs.ref }}
+        fetch-tags: true
+        fetch-depth: ${{ inputs.depth }}
 
     - name: Configure
       run: cmake -B build ${{matrix.platform.flags}} ${{matrix.config.flags}}
