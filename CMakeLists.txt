@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.28)
-project(sfml-rgb-canvas LANGUAGES CXX VERSION 0.1.0)
+project(sfml--rgb-canvas LANGUAGES CXX VERSION 0.1.0)
 
 # Global build output settings, for now
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
@@ -20,9 +20,13 @@ add_executable(demo
     src/demo/helper/demo_helper.cpp
 )
 
-add_library(sfml_rgb_canvas
+add_library(sfml--rgb-canvas
     src/canvas/canvas.cpp
+    src/canvas/helper.cpp
 )
 
+target_compile_features(sfml--rgb-canvas PUBLIC cxx_std_17)
+target_link_libraries(sfml--rgb-canvas PUBLIC SFML::Graphics)
+
 target_compile_features(demo PRIVATE cxx_std_17)
-target_link_libraries(demo PRIVATE SFML::Graphics)
+target_link_libraries(demo PRIVATE sfml--rgb-canvas)
