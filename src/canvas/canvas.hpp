@@ -11,7 +11,7 @@ namespace sf_canvas
 
     struct Pixel
     {
-        uint8_t Red, Green, Blue, Alpha;
+        uint8_t Red = 0, Green = 0, Blue = 0, Alpha = 255;
     };
 
     static_assert(std::is_standard_layout_v<Pixel>);
