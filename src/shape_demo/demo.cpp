@@ -214,11 +214,11 @@ namespace sfml_rgb_canvas::demo::shape
             // WINDOW UPDATES
 
             window.clear();
+            window.draw(sprite);
             window.draw(triangle);
             window.draw(circle);
             window.draw(triangleText);
             window.draw(circleText);
-            window.draw(sprite);
             window.display();
         }
 
