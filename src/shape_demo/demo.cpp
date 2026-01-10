@@ -23,7 +23,7 @@ namespace sfml_rgb_canvas::demo::shape
         window.setFramerateLimit(MAX_FRAME_RATE);
 
         sf::Texture texture(sf::Vector2u(CANVAS_WIDTH, CANVAS_HEIGHT));
-        sf_canvas::Canvas canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
+        sf_canvas::Canvas canvas(CANVAS_WIDTH, CANVAS_HEIGHT, sf_canvas::Pixel{150, 25, 200});
 
         texture.update(canvas.data());
 
