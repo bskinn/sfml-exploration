@@ -11,7 +11,7 @@
 #define CIRCLE_RADIUS 25.f
 #define BOUNCE_BUFFER 50.f
 
-namespace sfml_rgb_canvas::demo
+namespace sfml_rgb_canvas::demo::shape
 {
 
     int run_demo()
@@ -212,11 +212,11 @@ namespace sfml_rgb_canvas::demo
         return 0;
     }
 
-} // namespace sfml_rgb_canvas::demo
+} // namespace sfml_rgb_canvas::demo::shape
 
 // Actual entrypoint
 
 int main()
 {
-    sfml_rgb_canvas::demo::run_demo();
+    sfml_rgb_canvas::demo::shape::run_demo();
 }

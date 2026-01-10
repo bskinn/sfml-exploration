@@ -15,9 +15,9 @@ FetchContent_Declare(SFML
     SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
-add_executable(demo
-    src/demo/demo.cpp
-    src/demo/helper/demo_helper.cpp
+add_executable(shape-demo
+    src/shape_demo/demo.cpp
+    src/shape_demo/helper/demo_helper.cpp
 )
 
 add_library(sfml--rgb-canvas
@@ -28,5 +28,5 @@ add_library(sfml--rgb-canvas
 target_compile_features(sfml--rgb-canvas PUBLIC cxx_std_17)
 target_link_libraries(sfml--rgb-canvas PUBLIC SFML::Graphics)
 
-target_compile_features(demo PRIVATE cxx_std_17)
-target_link_libraries(demo PRIVATE sfml--rgb-canvas)
+target_compile_features(shape-demo PRIVATE cxx_std_17)
+target_link_libraries(shape-demo PRIVATE sfml--rgb-canvas)

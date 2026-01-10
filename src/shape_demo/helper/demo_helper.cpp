@@ -2,7 +2,7 @@
 
 #include "demo_helper.hpp"
 
-namespace sfml_rgb_canvas::demo::helper
+namespace sfml_rgb_canvas::demo::shape::helper
 {
 
     sf::Vector2f circleCenter(sf::CircleShape circ)
@@ -36,4 +36,4 @@ namespace sfml_rgb_canvas::demo::helper
         return std::max(boundRectSize.x, boundRectSize.y);
     }
 
-} // namespace sfml_rgb_canvas::demo::helper
+} // namespace sfml_rgb_canvas::demo::shape::helper
