@@ -36,11 +36,11 @@ namespace sfml_rgb_canvas::demo
 
         sf::Text triangleText(font);
         triangleText.setCharacterSize(40);
-        triangleText.setFillColor(sf::Color::White);
+        triangleText.setFillColor(sf::Color::White - sf::Color(0, 0, 0, 150));
 
         sf::Text circleText(font);
         circleText.setCharacterSize(40);
-        circleText.setFillColor(sf::Color::Yellow);
+        circleText.setFillColor(sf::Color::Yellow - sf::Color(0, 0, 0, 150));
         circleText.setPosition(sf::Vector2f(0., 50.));
 
         char triangleTextStr[100] = "";
@@ -123,6 +123,30 @@ namespace sfml_rgb_canvas::demo
             }
 
             // CIRCLE MOVEMENT
+
+            if (
+                sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Up) && circle.getFillColor().a < 255)
+            {
+                circle.setFillColor(circle.getFillColor() + sf::Color(0, 0, 0, 2));
+            }
+
+            if (
+                sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Down) && circle.getFillColor().a > 0)
+            {
+                circle.setFillColor(circle.getFillColor() - sf::Color(0, 0, 0, 2));
+            }
+
+            if (
+                sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::PageUp) && circle.getFillColor().r < 255)
+            {
+                circle.setFillColor(circle.getFillColor() + sf::Color(2, 2, 2, 0));
+            }
+
+            if (
+                sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::PageDown) && circle.getFillColor().r > 0)
+            {
+                circle.setFillColor(circle.getFillColor() - sf::Color(2, 2, 2, 0));
+            }
 
             if (circleXPosVel)
             {
