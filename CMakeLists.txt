@@ -1,8 +1,10 @@
 cmake_minimum_required(VERSION 3.28)
 project(sfml-rgb-canvas LANGUAGES CXX VERSION 0.1.0)
 
+# Global build output settings, for now
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib/shared)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib/static)
 
 include(FetchContent)
 FetchContent_Declare(SFML
