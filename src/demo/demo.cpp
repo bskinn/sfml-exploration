@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "helper/demo_helper.hpp"
+#include "../canvas/canvas.hpp"
 
 #define WINDOW_WIDTH 640u
 #define WINDOW_HEIGHT 480u
@@ -19,7 +20,7 @@ namespace sfml_rgb_canvas::demo
         window.setFramerateLimit(MAX_FRAME_RATE);
 
         sf::CircleShape circle(CIRCLE_RADIUS);
-        circle.setFillColor(sf::Color::Cyan);
+        circle.setFillColor(sf_canvas::helper::makeColorFromPixel(sf_canvas::Pixel{100, 100, 100, 255}));
         circle.setPosition(sf::Vector2f(160., 200.));
         // circle.setOrigin(circleCenter(circle));   // This doesn't work like you expect
 
