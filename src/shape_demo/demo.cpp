@@ -11,6 +11,9 @@
 #define CIRCLE_RADIUS 25.f
 #define BOUNCE_BUFFER 50.f
 
+#define CANVAS_WIDTH 150
+#define CANVAS_HEIGHT 100
+
 namespace sfml_rgb_canvas::demo::shape
 {
 
@@ -18,6 +21,15 @@ namespace sfml_rgb_canvas::demo::shape
     {
         auto window = sf::RenderWindow(sf::VideoMode({WINDOW_WIDTH, WINDOW_HEIGHT}), "Testing SFML");
         window.setFramerateLimit(MAX_FRAME_RATE);
+
+        sf::Texture texture(sf::Vector2u(CANVAS_WIDTH, CANVAS_HEIGHT));
+        sf_canvas::Canvas canvas(CANVAS_WIDTH, CANVAS_HEIGHT);
+
+        texture.update(canvas.data());
+
+        sf::Sprite sprite(texture);
+        sprite.setOrigin(sf::Vector2f(CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2));
+        sprite.setPosition(sf::Vector2f(50, 200));
 
         sf::CircleShape circle(CIRCLE_RADIUS);
         circle.setFillColor(sf_canvas::helper::makeColorFromPixel(sf_canvas::Pixel{100, 100, 100, 255}));
@@ -206,6 +218,7 @@ namespace sfml_rgb_canvas::demo::shape
             window.draw(circle);
             window.draw(triangleText);
             window.draw(circleText);
+            window.draw(sprite);
             window.display();
         }
 

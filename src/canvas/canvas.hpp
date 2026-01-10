@@ -27,6 +27,8 @@ namespace sf_canvas
     public:
         Canvas(uint16_t width, uint16_t height);
 
+        uint8_t *data(void);
+
     private:
         uint16_t width_, height_;
         std::vector<Pixel> pixels_;
