@@ -4,6 +4,8 @@
 #include <cstdint>
 #include <type_traits>
 
+#include <SFML/Graphics.hpp>
+
 namespace sf_canvas
 {
 
@@ -19,4 +21,10 @@ namespace sf_canvas
     static_assert(offsetof(Pixel, Blue) == 2);
     static_assert(offsetof(Pixel, Alpha) == 3);
 
+}
+
+namespace sf_canvas::helper
+{
+    sf::Color makeColorFromPixel(sf_canvas::Pixel px);
+    uint32_t makeU32FromPixel(sf_canvas::Pixel px);
 }
