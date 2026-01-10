@@ -26,6 +26,7 @@ namespace sf_canvas
     {
     public:
         Canvas(uint16_t width, uint16_t height);
+        Canvas(uint16_t width, uint16_t height, Pixel px);
 
         uint8_t *data(void);
 
