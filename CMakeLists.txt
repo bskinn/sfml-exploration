@@ -18,5 +18,9 @@ add_executable(demo
     src/demo/helper/demo_helper.cpp
 )
 
+add_library(sfml_rgb_canvas
+    src/canvas/canvas.cpp
+)
+
 target_compile_features(demo PRIVATE cxx_std_17)
 target_link_libraries(demo PRIVATE SFML::Graphics)
