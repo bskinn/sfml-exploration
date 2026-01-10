@@ -3,6 +3,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <type_traits>
+#include <vector>
 
 #include <SFML/Graphics.hpp>
 
@@ -20,6 +21,16 @@ namespace sf_canvas
     static_assert(offsetof(Pixel, Green) == 1);
     static_assert(offsetof(Pixel, Blue) == 2);
     static_assert(offsetof(Pixel, Alpha) == 3);
+
+    class Canvas
+    {
+    public:
+        Canvas(uint16_t width, uint16_t height);
+
+    private:
+        uint16_t width_, height_;
+        std::vector<Pixel> pixels_;
+    };
 
 } // namespace sf_canvas
 
