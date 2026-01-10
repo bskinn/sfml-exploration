@@ -12,7 +12,8 @@ namespace sf_canvas
     Canvas::Canvas(uint16_t width, uint16_t height, Pixel px)
         : width_(width), height_(height)
     {
-        std::vector<Pixel> pixels_(width_ * height_, px);
+        std::vector<Pixel> init_px(width_ * height_, px);
+        pixels_ = init_px;
     }
 
     uint8_t *Canvas::data()
