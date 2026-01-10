@@ -68,7 +68,15 @@ namespace sfml_rgb_canvas::demo
 
             // TRIANGLE MOVEMENT
 
-            triangle.rotate(sf::degrees(5));
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Right))
+            {
+                triangle.rotate(sf::degrees(5));
+            }
+
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Scan::Left))
+            {
+                triangle.rotate(sf::degrees(-5));
+            }
 
             if (triangleXPosVel)
             {
